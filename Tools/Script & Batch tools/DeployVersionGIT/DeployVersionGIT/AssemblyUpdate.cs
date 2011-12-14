@@ -25,7 +25,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace DeployVersionSVN
+namespace DeployVersionGIT
 {
   public class AssemblyUpdate
   {
@@ -36,14 +36,20 @@ namespace DeployVersionSVN
     }
 
     private readonly string _version;
+    private readonly string _fullVersion;
     private readonly UpdateMode _updateMode;
     private List<string> _excludedFiles;
 
-    public AssemblyUpdate(string version) : this(version, UpdateMode.Version) {}
+    public AssemblyUpdate(string version) : this(version, string.Empty, UpdateMode.Version) {}
 
-    public AssemblyUpdate(string version, UpdateMode mode)
+    public AssemblyUpdate(string version, UpdateMode mode) : this(version, string.Empty, mode) { }
+
+    public AssemblyUpdate(string version, string fullVesion) : this(version, fullVesion, UpdateMode.Version) { }
+
+    public AssemblyUpdate(string version, string fullVesion, UpdateMode mode)
     {
       _version = version;
+      _fullVersion = fullVesion;
       _updateMode = mode;
       _excludedFiles = new List<string>();
 
@@ -54,7 +60,6 @@ namespace DeployVersionSVN
     public void UpdateAll(string directory)
     {
       DirectoryInfo dir = new DirectoryInfo(directory);
-
       UpdateFile(dir, "SolutionInfo.cs");
       UpdateFile(dir, "AssemblyInfo.cs");
       SearchDirectory(dir);
@@ -64,7 +69,7 @@ namespace DeployVersionSVN
     {
       foreach (DirectoryInfo dir in directory.GetDirectories())
       {
-        if (dir.Name != ".svn" && dir.Name != "obj" && dir.Name != "bin")
+        if (dir.Name != ".git" && dir.Name != "obj" && dir.Name != "bin")
         {
           SearchDirectory(dir);
           UpdateFile(dir, "SolutionInfo.cs");
@@ -93,11 +98,21 @@ namespace DeployVersionSVN
 
         if (_updateMode == UpdateMode.Copyright)
           newtext = Regex.Replace(filetext, "^(.*AssemblyCopyright.*)$",
-                                  "[assembly: AssemblyCopyright(\"Copyright © " + _version + "\")]",
+                                  "[assembly: AssemblyCopyright(\"Copyright © " + _version + "\")]\r",
                                   RegexOptions.Multiline);
         else
+        {
           newtext = Regex.Replace(filetext, "(?<version>Version\\(\"[0-9]+.[0-9]+.[0-9]+.)(?<build>[0-9]+)",
                                   "${version}" + _version);
+          if (string.IsNullOrEmpty(_fullVersion))
+          {
+            newtext = Regex.Replace(newtext, "^(.*AssemblyInformationalVersion.*)$", "//[assembly: AssemblyInformationalVersion(\"\")]\r", RegexOptions.Multiline);
+          }
+          else
+          {
+            newtext = Regex.Replace(newtext, "^(.*AssemblyInformationalVersion.*)$", "[assembly: AssemblyInformationalVersion(\"" + _fullVersion + "\")]\r", RegexOptions.Multiline);
+          }
+        }
 
         if (filetext != newtext)
         {

@@ -25,11 +25,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly: AssemblyTitle("DeployVersionSVN")]
+[assembly: AssemblyTitle("DeployVersionGIT")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Team MediaPortal")]
-[assembly: AssemblyProduct("DeployVersionSVN")]
+[assembly: AssemblyProduct("DeployVersionGIT")]
 [assembly: AssemblyCopyright("Copyright © 2005-2011 Team MediaPortal")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
