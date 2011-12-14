@@ -844,6 +844,7 @@ namespace TvPlugin
       //set object count label
       GUIPropertyManager.SetProperty("#itemcount", Utils.GetObjectCountLabel(itemlist.Count - (itemlist.Count > 0 && itemlist[0].Label == ".." ? 1 : 0)));
 
+      SwitchLayout();
       OnSort();
       UpdateProperties();
     }
@@ -1097,7 +1098,7 @@ namespace TvPlugin
         TVHome.Card.StopTimeShifting();
       }
 
-      return TVUtil.PlayRecording(rec, stoptime, g_Player.MediaType.Radio);
+      return TVUtil.PlayRecording(rec, stoptime, g_Player.MediaType.RadioRecording);
     }
 
     private void OnDeleteRecording(int iItem)
@@ -1667,7 +1668,7 @@ namespace TvPlugin
     private void doOnPlayBackStoppedOrChanged(g_Player.MediaType type, int stoptime, string filename, string caller)
     {
       Log.Info("RadioRecorded:{0} {1} {2}", caller, type, filename);
-      if (type != g_Player.MediaType.Recording)
+      if (type != g_Player.MediaType.Radio)
       {
         return;
       }
@@ -1712,7 +1713,7 @@ namespace TvPlugin
 
     private void OnPlayRecordingBackEnded(g_Player.MediaType type, string filename)
     {
-      if (type != g_Player.MediaType.Recording)
+      if (type != g_Player.MediaType.Radio)
       {
         return;
       }
@@ -1749,7 +1750,7 @@ namespace TvPlugin
 
     private void OnPlayRecordingBackStarted(g_Player.MediaType type, string filename)
     {
-      if (type != g_Player.MediaType.Recording)
+      if (type != g_Player.MediaType.Radio)
       {
         return;
       }
