@@ -272,7 +272,7 @@ namespace MediaPortal.TagReader
       for (int i = 0; i < file.Length; i++)
       {
         file[i] = file[i].Trim();
-        string prefix = "";
+        string prefix = "trash";
         if (file[i].Length > 1)
         {
           prefix = file[i].Substring(0, file[i].IndexOf(' ')).ToUpper();
@@ -288,6 +288,10 @@ namespace MediaPortal.TagReader
             break;
           case "FILE":
             currentFile = ParseFile(file[i], trackOn);
+            if (currentFile.Filename != null && trackOn > -1) //if there's a file
+            {
+              m_Tracks[trackOn].DataFile = currentFile;
+            }
             break;
           case "FLAGS":
             ParseFlags(file[i], trackOn);
@@ -319,7 +323,7 @@ namespace MediaPortal.TagReader
           case "TRACK":
             trackOn++;
             ParseTrack(file[i], trackOn);
-            if (currentFile.Filename != null)
+            if (currentFile.Filename != null) //if there's a file
             {
               m_Tracks[trackOn].DataFile = currentFile;
             }

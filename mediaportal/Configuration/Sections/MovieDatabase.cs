@@ -3694,7 +3694,6 @@ namespace MediaPortal.Configuration.Sections
         //
         // New filenames
         //
-        title = Util.Utils.MakeFileName(title);
         string strThumbNew = Path.GetDirectoryName(strThumb) + "\\" + title + "{" + id + "}.jpg";
         string strLargeThumbNew = Path.GetDirectoryName(largeThumb) + "\\" + title + "{" + id + "}L.jpg";
         //
@@ -3761,9 +3760,8 @@ namespace MediaPortal.Configuration.Sections
         //
         // New filenames
         //
-        title = Util.Utils.MakeFileName(movie.Title);
-        string strThumbNew = Path.GetDirectoryName(strThumb) + "\\" + title + ".jpg";
-        string strLargeThumbNew = Path.GetDirectoryName(largeThumb) + "\\" + title + "L.jpg";
+        string strThumbNew = Path.GetDirectoryName(strThumb) + "\\" + movie.Title + ".jpg";
+        string strLargeThumbNew = Path.GetDirectoryName(largeThumb) + "\\" + movie.Title + "L.jpg";
         //
         // Copy new files and delete old ones
         //

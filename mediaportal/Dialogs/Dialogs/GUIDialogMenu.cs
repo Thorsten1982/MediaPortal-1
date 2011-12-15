@@ -196,7 +196,6 @@ namespace MediaPortal.Dialogs
       listItems.DisposeAndClearList();
       showQuickNumbers = true;
       selectedItemIndex = -1;
-      selectedItemLabel = string.Empty;
     }
 
     public override void DoModal(int dwParentId)

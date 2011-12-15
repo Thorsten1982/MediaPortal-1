@@ -100,17 +100,9 @@ namespace MediaPortal.GUI.Video
       {
         videoOverlay.Focused = false;
       }
-      // GoBack bug fix (corrupted video info)
+
       if (currentMovie == null)
       {
-        if (GUIWindowManager.HasPreviousWindow())
-        {
-          GUIWindowManager.ShowPreviousWindow();
-        }
-        else
-        {
-          GUIWindowManager.CloseCurrentWindow();
-        }
         return;
       }
       // Default picture					
@@ -276,7 +268,10 @@ namespace MediaPortal.GUI.Video
         //
         // 07.11.2010 Deda: Cache entry Flag change for cover thumb file
         //
-        Util.Utils.DoInsertNonExistingFileIntoCache(coverArtImage);
+        Util.Utils.FileLookUpItem fileLookUpItem = new Util.Utils.FileLookUpItem();
+        fileLookUpItem.Filename = coverArtImage;
+        fileLookUpItem.Exists = false;
+        Util.Utils.UpdateLookUpCacheItem(fileLookUpItem, coverArtImage);
         //
         Util.Utils.FileDelete(largeCoverArtImage);
         Refresh(false);

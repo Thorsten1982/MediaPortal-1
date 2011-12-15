@@ -1835,7 +1835,7 @@ namespace MediaPortal.GUI.Weather
 
     public bool CanEnable()
     {
-      return false;
+      return true;
     }
 
     public string PluginName()
@@ -1845,7 +1845,7 @@ namespace MediaPortal.GUI.Weather
 
     public bool DefaultEnabled()
     {
-      return false;
+      return true;
     }
 
     public bool HasSetup()
@@ -1865,7 +1865,7 @@ namespace MediaPortal.GUI.Weather
       strButtonImage = string.Empty;
       strButtonImageFocus = string.Empty;
       strPictureImage = @"hover_my weather.png";
-      return false;
+      return true;
     }
 
     public string Author()

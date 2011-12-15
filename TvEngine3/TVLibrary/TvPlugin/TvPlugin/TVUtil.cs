@@ -404,20 +404,6 @@ namespace TvPlugin
       return false;
     }
 
-    public static string GetChannelLogo (Channel channel)
-    {
-      string logo = string.Empty;
-      if (null != channel && channel.IsTv)
-      {
-        logo = Utils.GetCoverArt(Thumbs.TVChannel, channel.DisplayName);
-      }
-      else if (null != channel && channel.IsRadio)
-      {
-        logo = Utils.GetCoverArt(Thumbs.Radio, channel.DisplayName);
-      }
-      return logo;
-    }
-
 
     #region scheduler helper methods
 

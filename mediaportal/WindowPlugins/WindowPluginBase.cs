@@ -282,12 +282,6 @@ namespace WindowPlugins
 
     protected virtual void UpdateButtonStates()
     {
-      // skip all this if we're not active window
-      if (GUIWindowManager.ActiveWindow != GetID)
-      {
-        return;
-      }
-
       if (handler != null)
       {
         GUIPropertyManager.SetProperty("#itemtype", handler.LocalizedCurrentViewLevel);

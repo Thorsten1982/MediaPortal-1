@@ -599,9 +599,7 @@ namespace MediaPortal.GUI.Music
         }
 
         // Duration
-        string strDuration = tag.Duration <= 0
-                       ? string.Empty
-                       : MediaPortal.Util.Utils.SecondsToHMSString(tag.Duration);
+        string strDuration = tag.Duration <= 0 ? string.Empty : tag.Duration.ToString();
 
         // Track
         string strNextTrack = tag.Track <= 0 ? string.Empty : tag.Track.ToString();

@@ -49,7 +49,6 @@ namespace MediaPortal.Player
       Video,
       TV,
       Radio,
-      RadioRecording,
       Music,
       Recording,
       Unknown

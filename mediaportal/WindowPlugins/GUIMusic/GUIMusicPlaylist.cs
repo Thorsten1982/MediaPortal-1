@@ -916,7 +916,7 @@ namespace MediaPortal.GUI.Music
 
     private void SavePlayList()
     {
-      string strNewFileName = playlistPlayer.CurrentPlaylistName;
+      string strNewFileName = string.Empty;
       if (GetKeyboard(ref strNewFileName))
       {
         string strPath = Path.GetFileNameWithoutExtension(strNewFileName);

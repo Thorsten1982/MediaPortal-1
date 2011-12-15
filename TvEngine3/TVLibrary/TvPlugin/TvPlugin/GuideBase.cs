@@ -32,7 +32,6 @@ namespace TvPlugin
 {
   public abstract class GuideBase : GUIDialogWindow
   {
-    protected int _previousChannelCount = 0;    
     protected const int MaxDaysInGuide = 30;
     protected const int RowID = 1000;
     protected const int ColID = 10;
@@ -423,13 +422,7 @@ namespace TvPlugin
           int firstButtonYPos = 0;
           int lastButtonYPos = 0;
 
-          int channelCount = _channelCount;
-          if (_previousChannelCount > channelCount)
-          {
-            channelCount = _previousChannelCount;
-          }
-
-          for (int iChannel = 0; iChannel < channelCount; iChannel++)
+          for (int iChannel = 0; iChannel < _channelCount; iChannel++)
           {
             if (chan < _channelList.Count)
             {
